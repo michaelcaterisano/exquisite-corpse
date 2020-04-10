@@ -14,6 +14,9 @@
   </head>
   <body>
     <div id="content">
+      <div id="title-content">
+        <span class="title">exquisite corpse</span>
+      </div>
       <div class="waveform-container">
         <span class="label">jim baker to cutlet</span>
 
@@ -64,74 +67,56 @@
       font-family: monospace, monospace;
       color: white;
     }
+
+    #title-content {
+    }
+
+    .title {
+      font-size: 30px;
+      font-family: monospace, monospace;
+      color: white;
+    }
   </style>
 
   <script>
     const waveColor = "#68CDEE";
     const progressColor = "#54aec9";
+
     // set up wavesurfer objects
     var wavesurferB1 = WaveSurfer.create({
       container: "#B1",
       waveColor: waveColor,
       progressColor: progressColor,
+      hideScrollebar: true,
+      responsive: true,
+      interact: false,
     });
 
     var wavesurferC1 = WaveSurfer.create({
       container: "#C1",
       waveColor: waveColor,
       progressColor: progressColor,
+      hideScrollebar: true,
+      responsive: true,
+      interact: false,
     });
 
     var wavesurferB2 = WaveSurfer.create({
       container: "#B2",
       waveColor: waveColor,
       progressColor: progressColor,
+      hideScrollebar: true,
+      responsive: true,
+      interact: false,
     });
 
     var wavesurferC2 = WaveSurfer.create({
       container: "#C2",
       waveColor: waveColor,
       progressColor: progressColor,
-    });
-
-    const responsiveWaveB1 = wavesurferB1.util.debounce(() => {
-      wavesurferB1.drawer.setWidth(0),
-        wavesurferB1.drawer.drawPeaks(
-          {
-            length: wavesurferB1.drawer.getWidth(),
-          },
-          0
-        );
-      wavesurferB1.drawBuffer();
-    }, 150);
-
-    const responsiveWaveB2 = wavesurferB1.util.debounce(() => {
-      wavesurferB2.drawer.setWidth(0),
-        wavesurferB2.drawer.drawPeaks(
-          {
-            length: wavesurferB2.drawer.getWidth(),
-          },
-          0
-        );
-      wavesurferB2.drawBuffer();
-    }, 150);
-
-    const responsiveWaveC1 = wavesurferB1.util.debounce(() => {
-      wavesurferC1.drawer.setWidth(0),
-        wavesurferC1.drawer.drawPeaks(
-          {
-            length: wavesurferC1.drawer.getWidth(),
-          },
-          0
-        );
-      wavesurferC1.drawBuffer();
-    }, 150);
-
-    window.addEventListener("resize", () => {
-      responsiveWaveB1();
-      responsiveWaveB2();
-      responsiveWaveC1();
-      responsiveWaveC2();
+      hideScrollebar: true,
+      responsive: true,
+      interact: false,
     });
 
     const responsiveWaveC2 = wavesurferB1.util.debounce(() => {
