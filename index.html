@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <!-- <link rel="icon" type="image/png" sizes="174x174" href="./favicon.png"> -->
+
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+  </head>
+  <body>
+    <div id="waveform-container">
+      <div id="B1" class="waveform"></div>
+      <div id="C1"></div>
+      <div id="B2"></div>
+      <div id="C2"></div>
+    </div>
+  </body>
+
+  <style>
+    body {
+      margin: 0 auto;
+      background-color: black;
+    }
+
+    #waveform-container {
+      padding: 10%;
+    }
+
+    .waveform {
+      margin: 0 auto;
+      text-align: center;
+    }
+  </style>
+
+  <script>
+    const waveformColor = "black";
+    // set up wavesurfer objects
+    var wavesurferB1 = WaveSurfer.create({
+      container: "#B1",
+      waveColor: "violet",
+      progressColor: "purple",
+    });
+
+    var wavesurferC1 = WaveSurfer.create({
+      container: "#C1",
+      waveColor: "violet",
+      progressColor: "purple",
+    });
+
+    var wavesurferB2 = WaveSurfer.create({
+      container: "#B2",
+      waveColor: "violet",
+      progressColor: "purple",
+    });
+
+    var wavesurferC2 = WaveSurfer.create({
+      container: "#C2",
+      waveColor: "violet",
+      progressColor: "purple",
+    });
+
+    const responsiveWaveB1 = wavesurferB1.util.debounce(() => {
+      wavesurferB1.drawer.setWidth(0),
+        wavesurferB1.drawer.drawPeaks(
+          {
+            length: wavesurferB1.drawer.getWidth(),
+          },
+          0
+        );
+      wavesurferB1.drawBuffer();
+    }, 150);
+
+    const responsiveWaveB2 = wavesurferB1.util.debounce(() => {
+      wavesurferB2.drawer.setWidth(0),
+        wavesurferB2.drawer.drawPeaks(
+          {
+            length: wavesurferB2.drawer.getWidth(),
+          },
+          0
+        );
+      wavesurferB2.drawBuffer();
+    }, 150);
+
+    const responsiveWaveC1 = wavesurferB1.util.debounce(() => {
+      wavesurferC1.drawer.setWidth(0),
+        wavesurferC1.drawer.drawPeaks(
+          {
+            length: wavesurferC1.drawer.getWidth(),
+          },
+          0
+        );
+      wavesurferC1.drawBuffer();
+    }, 150);
+
+    window.addEventListener("resize", () => {
+      responsiveWaveB1();
+      responsiveWaveB2();
+      responsiveWaveC1();
+      responsiveWaveC2();
+    });
+
+    const responsiveWaveC2 = wavesurferB1.util.debounce(() => {
+      wavesurferC2.drawer.setWidth(0),
+        wavesurferC2.drawer.drawPeaks(
+          {
+            length: wavesurferC2.drawer.getWidth(),
+          },
+          0
+        );
+      wavesurferC2.drawBuffer();
+    }, 150);
+
+    // load audio
+    wavesurferB1.load("audio/baker1.wav");
+    wavesurferC1.load("audio/cutlet1.wav");
+    wavesurferB2.load("audio/baker2.wav");
+    wavesurferC2.load("audio/cutlet2.wav");
+
+    // set up listeners
+    wavesurferB1.on("ready", function () {
+      wavesurferB1.play();
+    });
+
+    wavesurferB1.on("finish", function () {
+      wavesurferC1.play();
+    });
+
+    wavesurferC1.on("finish", function () {
+      wavesurferB2.play();
+    });
+
+    wavesurferB2.on("finish", function () {
+      wavesurferC2.play();
+    });
+  </script>
+</html>
