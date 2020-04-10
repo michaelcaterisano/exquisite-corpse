@@ -13,55 +13,85 @@
     <script src="https://unpkg.com/wavesurfer.js"></script>
   </head>
   <body>
-    <div id="waveform-container">
-      <div id="B1" class="waveform"></div>
-      <div id="C1"></div>
-      <div id="B2"></div>
-      <div id="C2"></div>
+    <div id="content">
+      <div class="waveform-container">
+        <span class="label">jim baker to cutlet</span>
+
+        <div id="B1"></div>
+      </div>
+
+      <div class="waveform-container">
+        <span class="label">cutlet reply to jim baker</span>
+
+        <div id="C1"></div>
+      </div>
+
+      <div class="waveform-container">
+        <span class="label">jim baker reply to cutlet</span>
+
+        <div id="B2"></div>
+      </div>
+
+      <div class="waveform-container">
+        <span class="label">cutlet reply to jim baker</span>
+
+        <div id="C2"></div>
+      </div>
     </div>
   </body>
 
   <style>
     body {
-      margin: 0 auto;
-      background-color: black;
+      background-color: rgb(32, 35, 48);
     }
 
-    #waveform-container {
-      padding: 10%;
+    #content {
+      width: 90%;
+      max-width: 900px;
+      min-width: 300px;
+      margin: 0 auto;
+      position: relative;
     }
 
-    .waveform {
-      margin: 0 auto;
+    .waveform-container {
+      padding: 10px;
       text-align: center;
+      margin-bottom: 50px;
+      box-shadow: 0px 0px 30px 10px #68cdee;
+    }
+
+    .label {
+      font-family: monospace, monospace;
+      color: white;
     }
   </style>
 
   <script>
-    const waveformColor = "black";
+    const waveColor = "#68CDEE";
+    const progressColor = "#54aec9";
     // set up wavesurfer objects
     var wavesurferB1 = WaveSurfer.create({
       container: "#B1",
-      waveColor: "violet",
-      progressColor: "purple",
+      waveColor: waveColor,
+      progressColor: progressColor,
     });
 
     var wavesurferC1 = WaveSurfer.create({
       container: "#C1",
-      waveColor: "violet",
-      progressColor: "purple",
+      waveColor: waveColor,
+      progressColor: progressColor,
     });
 
     var wavesurferB2 = WaveSurfer.create({
       container: "#B2",
-      waveColor: "violet",
-      progressColor: "purple",
+      waveColor: waveColor,
+      progressColor: progressColor,
     });
 
     var wavesurferC2 = WaveSurfer.create({
       container: "#C2",
-      waveColor: "violet",
-      progressColor: "purple",
+      waveColor: waveColor,
+      progressColor: progressColor,
     });
 
     const responsiveWaveB1 = wavesurferB1.util.debounce(() => {
