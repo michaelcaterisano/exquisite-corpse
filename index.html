@@ -126,6 +126,7 @@
     wavesurferB1.on("ready", function () {
       let B1wrapper = document.querySelector("#B1-wrapper");
       B1wrapper.addEventListener("click", function () {
+        B1wrapper.style.pointerEvents = "none";
         wavesurferB1.play();
       });
     });
