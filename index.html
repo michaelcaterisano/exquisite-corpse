@@ -17,27 +17,24 @@
       <div id="title-content">
         <span class="title">exquisite corpse</span>
       </div>
-      <div class="waveform-container">
-        <span class="label">jim baker to cutlet</span>
 
+      <div id="B1-wrapper" class="waveform-container">
+        <span class="label">jim baker to cutlet (click to start)</span>
         <div id="B1"></div>
       </div>
 
       <div class="waveform-container">
         <span class="label">cutlet reply to jim baker</span>
-
         <div id="C1"></div>
       </div>
 
       <div class="waveform-container">
         <span class="label">jim baker reply to cutlet</span>
-
         <div id="B2"></div>
       </div>
 
       <div class="waveform-container">
         <span class="label">cutlet reply to jim baker</span>
-
         <div id="C2"></div>
       </div>
     </div>
@@ -119,17 +116,6 @@
       interact: false,
     });
 
-    const responsiveWaveC2 = wavesurferB1.util.debounce(() => {
-      wavesurferC2.drawer.setWidth(0),
-        wavesurferC2.drawer.drawPeaks(
-          {
-            length: wavesurferC2.drawer.getWidth(),
-          },
-          0
-        );
-      wavesurferC2.drawBuffer();
-    }, 150);
-
     // load audio
     wavesurferB1.load("https://corpse-audio.s3.amazonaws.com/cutlet2.wav");
     wavesurferC1.load("https://corpse-audio.s3.amazonaws.com/cutlet1.wav");
@@ -138,7 +124,10 @@
 
     // set up listeners
     wavesurferB1.on("ready", function () {
-      wavesurferB1.play();
+      let B1wrapper = document.querySelector("#B1-wrapper");
+      B1wrapper.addEventListener("click", function () {
+        wavesurferB1.play();
+      });
     });
 
     wavesurferB1.on("finish", function () {
