@@ -37,6 +37,11 @@
         <span class="label">cutlet reply to jim baker</span>
         <div id="C2"></div>
       </div>
+
+      <div class="waveform-container">
+        <span class="label">baker reply to cutlet</span>
+        <div id="B3"></div>
+      </div>
     </div>
   </body>
 
@@ -116,11 +121,21 @@
       interact: false,
     });
 
+    var wavesurferB3 = WaveSurfer.create({
+      container: "#B3",
+      waveColor: waveColor,
+      progressColor: progressColor,
+      hideScrollebar: true,
+      responsive: true,
+      interact: false,
+    });
+
     // load audio
     wavesurferB1.load("https://corpse-audio.s3.amazonaws.com/baker1.wav");
     wavesurferC1.load("https://corpse-audio.s3.amazonaws.com/cutlet1.wav");
     wavesurferB2.load("https://corpse-audio.s3.amazonaws.com/baker2.wav");
     wavesurferC2.load("https://corpse-audio.s3.amazonaws.com/cutlet2.wav");
+    wavesurferB3.load("https://corpse-audio.s3.amazonaws.com/baker3.wav");
 
     // set up listeners
     wavesurferB1.on("ready", function () {
@@ -141,6 +156,10 @@
 
     wavesurferB2.on("finish", function () {
       wavesurferC2.play();
+    });
+
+    wavesurferC2.on("finish", function () {
+      wavesurferB3.play();
     });
   </script>
 </html>
